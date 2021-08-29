@@ -12,3 +12,8 @@
     justify-content: center;
     outline: 1px solid red;
 }
+#Players {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
