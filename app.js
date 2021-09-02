@@ -4,12 +4,19 @@ const Player = (name, marker) => {
 
 const displayController = (() => {
     const button = document.querySelector("button");
-    const playerOneName = document.querySelector("#playerOneName").value;
-    const playerTwoName = document.querySelector("#playerTwoName").value;
+
+    
     button.addEventListener("click", () => {
+        const playerOneName = document.querySelector("#playerOneName").value;
+        const playerTwoName = document.querySelector("#playerTwoName").value;
         player1 = Player(playerOneName, "X");
         player2 = Player(playerTwoName, "O");
-    if (player1.name != "") {
+        document.querySelector("#results").textContent = "";
+        document.querySelectorAll(".boardTile").forEach(tile => {
+            tile.textContent = ""
+        });
+        gameBoard.gameArray = ["", "", "", "", "", "", "", "", ""]
+    if (player1.name != "" && player2.name != "") {
         const boardSize = 9
         let turn = "first"
         const boardContainer = document.querySelector("#boardContainer")
@@ -21,12 +28,13 @@ const displayController = (() => {
         }
         document.querySelectorAll(".boardTile").forEach(tile => {
             tile.addEventListener("click", () => {
-                if (turn == "first" && tile.textContent==""){
+                if (turn == "first" && tile.textContent=="" && document.querySelector("#results").textContent == "") {
                     gameBoard.gameArray.splice(tile.id, 1, 1)
                     document.querySelectorAll(".boardTile")[tile.id].textContent = player1.marker
                     turn = "second";
                     gameBoard.whoIsWinner();
-                } else if (turn == "second" && tile.textContent=="") {
+                    
+                } else if (turn == "second" && tile.textContent=="" && document.querySelector("#results").textContent == "") {
                     gameBoard.gameArray.splice(tile.id, 1, -1)
                     document.querySelectorAll(".boardTile")[tile.id].textContent = player2.marker
                     turn = "first";
@@ -114,4 +122,3 @@ const gameBoard = (() => {
     };
     return {gameArray, whoIsWinner}
 })();
-
