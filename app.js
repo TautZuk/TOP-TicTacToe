@@ -2,11 +2,47 @@ const Player = (name, marker) => {
     return {name, marker};
 };
 
-const player1 = Player("First", "X");
-const player2 = Player("Second", "O");
+const displayController = (() => {
+    const button = document.querySelector("button");
+    const playerOneName = document.querySelector("#playerOneName").value;
+    const playerTwoName = document.querySelector("#playerTwoName").value;
+    button.addEventListener("click", () => {
+        player1 = Player(playerOneName, "X");
+        player2 = Player(playerTwoName, "O");
+    if (player1.name != "") {
+        const boardSize = 9
+        let turn = "first"
+        const boardContainer = document.querySelector("#boardContainer")
+        for (let i = 0; i < boardSize; i++) {
+            const boardTile = document.createElement("div")
+            boardTile.classList.add("boardTile")
+            boardTile.setAttribute("id", i)
+            boardContainer.appendChild(boardTile);
+        }
+        document.querySelectorAll(".boardTile").forEach(tile => {
+            tile.addEventListener("click", () => {
+                if (turn == "first" && tile.textContent==""){
+                    gameBoard.gameArray.splice(tile.id, 1, 1)
+                    document.querySelectorAll(".boardTile")[tile.id].textContent = player1.marker
+                    turn = "second";
+                    gameBoard.whoIsWinner();
+                } else if (turn == "second" && tile.textContent=="") {
+                    gameBoard.gameArray.splice(tile.id, 1, -1)
+                    document.querySelectorAll(".boardTile")[tile.id].textContent = player2.marker
+                    turn = "first";
+                    gameBoard.whoIsWinner();
+                }
+            })
+        })
+    }
+})
+
+ 
+})();
 
 const gameBoard = (() => {
     const gameArray = ["", "", "", "", "", "", "","",""]
+    // X = 1 ; O = -1. this function checks if any row in the game array has a sum of 3 or -3 and declares a winner
     let whoIsWinner = function winner() {
         switch(gameBoard.gameArray[0] + gameBoard.gameArray[1] + gameBoard.gameArray[2]) {
             case 3:
@@ -72,38 +108,10 @@ const gameBoard = (() => {
                 document.querySelector("#results").textContent = player2.name + " is a winner"
                 break;
         }
+        if (gameBoard.gameArray.includes("") == false) {
+            document.querySelector("#results").textContent = "It's a tie!"
+        }
     };
     return {gameArray, whoIsWinner}
 })();
 
-const displayController = (() => {
-    const boardSize = 9
-    let turn = "first"
-    const boardContainer = document.querySelector("#boardContainer")
-    for (let i = 0; i < boardSize; i++) {
-        const boardTile = document.createElement("div")
-        boardTile.classList.add("boardTile")
-        boardTile.setAttribute("id", i)
-        boardContainer.appendChild(boardTile);
-    }
-    document.querySelectorAll(".boardTile").forEach(tile => {
-        tile.addEventListener("click", () => {
-            if (turn == "first" && tile.textContent==""){
-            gameBoard.gameArray.splice(tile.id, 1, 1)
-            document.querySelectorAll(".boardTile")[tile.id].textContent = player1.marker
-            turn = "second";
-            gameBoard.whoIsWinner();
-            } else if (turn == "second" && tile.textContent=="") {
-            gameBoard.gameArray.splice(tile.id, 1, -1)
-            document.querySelectorAll(".boardTile")[tile.id].textContent = player2.marker
-            turn = "first";
-            gameBoard.whoIsWinner();
-            }
-        })
-    })
-})();
-
-const cleanBoard = (() => {
-    gameBoard.gameArray = ["","","","","","","","",""];
-    document.querySelector("#results").textContent = "";
-})

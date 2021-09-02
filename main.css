@@ -2,8 +2,9 @@
     margin-top: 10rem;
     display: grid;
     justify-content: center;
-    grid-template-columns: 3rem 3rem 3rem;
-    grid-template-rows: 3rem 3rem 3rem;
+    font-size: 5rem;
+    grid-template-columns: 10rem 10rem 10rem;
+    grid-template-rows: 10rem 10rem 10rem;
 }
 
 .boardTile { 
@@ -16,4 +17,9 @@
     display: flex;
     justify-content: center;
     gap: 2rem;
+}
+.gameButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem
 }
