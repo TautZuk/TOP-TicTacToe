@@ -23,10 +23,13 @@ const displayController = (() => {
         });
         gameBoard.gameArray = ["", "", "", "", "", "", "", "", ""]
     if (player1.name != "" || player2.name != "") {
-        const boardSize = 9
+        const cleanBoard = document.querySelectorAll(".boardTile");
+        for(let j = 0; j < cleanBoard.length; j++){
+            cleanBoard[j].remove();
+         };
         let turn = "first"
         const boardContainer = document.querySelector("#boardContainer")
-        for (let i = 0; i < boardSize; i++) {
+        for (let i = 0; i < 9; i++) {
             const boardTile = document.createElement("div")
             boardTile.classList.add("boardTile")
             boardTile.setAttribute("id", i)

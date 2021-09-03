@@ -5,13 +5,18 @@
     font-size: 5rem;
     grid-template-columns: 10rem 10rem 10rem;
     grid-template-rows: 10rem 10rem 10rem;
+    border-color: black;
 }
 
 .boardTile { 
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: 1px solid red;
+    border: 2px #DDDDDD solid;
+}
+
+.boardTile:hover { 
+    background-color:beige;
 }
 #Players {
     display: flex;
