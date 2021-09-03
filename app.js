@@ -7,8 +7,14 @@ const displayController = (() => {
 
     
     button.addEventListener("click", () => {
-        const playerOneName = document.querySelector("#playerOneName").value;
-        const playerTwoName = document.querySelector("#playerTwoName").value;
+        let playerOneName = document.querySelector("#playerOneName").value;
+        let playerTwoName = document.querySelector("#playerTwoName").value;
+        if (playerOneName == "") {
+            playerOneName = "X"
+        }
+        if (playerTwoName == "") {
+            playerTwoName = "O"
+        }
         player1 = Player(playerOneName, "X");
         player2 = Player(playerTwoName, "O");
         document.querySelector("#results").textContent = "";
@@ -16,7 +22,7 @@ const displayController = (() => {
             tile.textContent = ""
         });
         gameBoard.gameArray = ["", "", "", "", "", "", "", "", ""]
-    if (player1.name != "" && player2.name != "") {
+    if (player1.name != "" || player2.name != "") {
         const boardSize = 9
         let turn = "first"
         const boardContainer = document.querySelector("#boardContainer")
