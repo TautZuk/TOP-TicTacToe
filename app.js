@@ -101,7 +101,7 @@ const gameBoard = (() => {
                 document.querySelector("#results").textContent = player2.name + " is a winner"
                 break;
         }
-        switch(gameBoard.gameArray[3] + gameBoard.gameArray[5] + gameBoard.gameArray[8]) {
+        switch(gameBoard.gameArray[2] + gameBoard.gameArray[5] + gameBoard.gameArray[8]) {
             case 3:
                 document.querySelector("#results").textContent = player1.name + " is a winner";
                 break;
