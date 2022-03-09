@@ -125,7 +125,7 @@ const gameBoard = (() => {
                 document.querySelector("#results").textContent = player2.name + " is a winner"
                 break;
         }
-        if ((gameBoard.gameArray.includes("") == false ) && (document.querySelector("#results").innerText = "")) {
+        if (gameBoard.gameArray.includes("") == false  && document.querySelector("#results").textContent == "") {
             document.querySelector("#results").textContent = "It's a tie!"
         }
     };
